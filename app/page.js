@@ -368,7 +368,7 @@ export default function QuizPage() {
               <button
                 onClick={prev}
                 disabled={page === 0}
-                className="w-full md:w-auto px-6 py-3 rounded-xl font-medium border-2 border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gray-200"
+                className="w-full md:w-auto px-6 py-3 rounded-xl text-black font-medium border-2 border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gray-200"
               >
                 ← Өмнөх
               </button>

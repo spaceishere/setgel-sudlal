@@ -38,7 +38,12 @@ export default function AdminPage() {
         <header className="mb-6 flex items-center justify-between">
           <h1 className="text-2xl md:text-3xl font-bold">Админ • Лидерборд</h1>
           <div className="flex gap-2">
-            <a href="/" className="px-4 py-2 rounded-lg border hover:bg-gray-50">Буцах</a>
+            <a
+              href="/"
+              className="px-4 py-2 rounded-lg border hover:bg-gray-50"
+            >
+              Буцах
+            </a>
           </div>
         </header>
 
@@ -53,21 +58,30 @@ export default function AdminPage() {
             <table className="min-w-full text-sm">
               <thead>
                 <tr className="text-left text-gray-600 border-b">
-                  <th className="py-2 pr-4">#</th>
-                  <th className="py-2 pr-4">Нэр</th>
-                  <th className="py-2 pr-4">Оноо</th>
-                  <th className="py-2 pr-4">Хувь</th>
-                  <th className="py-2 pr-4">Огноо</th>
+                  <th className="py-2 pr-4 text-black">#</th>
+                  <th className="py-2 pr-4 text-black">Нэр</th>
+                  <th className="py-2 pr-4 text-black">Оноо</th>
+                  <th className="py-2 pr-4 text-black">Хувь</th>
+                  <th className="py-2 pr-4 text-black">Огноо</th>
                 </tr>
               </thead>
               <tbody>
                 {sorted.map((row, i) => (
-                  <tr key={`${row.nick}-${i}`} className="border-b last:border-0">
-                    <td className="py-2 pr-4 font-medium">{i + 1}</td>
-                    <td className="py-2 pr-4">{row.nick}</td>
-                    <td className="py-2 pr-4">{row.correct} / {row.total}</td>
-                    <td className="py-2 pr-4">{row.percentage}%</td>
-                    <td className="py-2 pr-4 text-gray-500">{new Date(row.date).toLocaleString()}</td>
+                  <tr
+                    key={`${row.nick}-${i}`}
+                    className="border-b last:border-0"
+                  >
+                    <td className="py-2 pr-4 text-black font-medium">
+                      {i + 1}
+                    </td>
+                    <td className="py-2 pr-4 text-black">{row.nick}</td>
+                    <td className="py-2 pr-4 text-black">
+                      {row.correct} / {row.total}
+                    </td>
+                    <td className="py-2 pr-4 text-black">{row.percentage}%</td>
+                    <td className="py-2 pr-4 text-black text-gray-500">
+                      {new Date(row.date).toLocaleString()}
+                    </td>
                   </tr>
                 ))}
               </tbody>
