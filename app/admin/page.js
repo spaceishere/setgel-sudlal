@@ -36,7 +36,9 @@ export default function AdminPage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white p-6">
       <div className="mx-auto max-w-4xl bg-white rounded-2xl shadow-md p-6">
         <header className="mb-6 flex items-center justify-between">
-          <h1 className="text-2xl md:text-3xl font-bold">Админ • Лидерборд</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-black">
+            Админ • Лидерборд
+          </h1>
           <div className="flex gap-2">
             <a
               href="/"
