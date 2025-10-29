@@ -424,7 +424,7 @@ export default function QuizPage() {
                         className={`p-3 rounded-lg ${
                           typeof answers[q.id] === "number" &&
                           answers[q.id] === q.correct
-                            ? "bg-green-50 border border-green-200"
+                            ? "bg-green-50 border border-green-200 text-black"
                             : typeof answers[q.id] === "number"
                             ? "bg-red-50 border border-red-200"
                             : "bg-gray-50"
