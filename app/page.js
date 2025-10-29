@@ -280,12 +280,16 @@ export default function QuizPage() {
                   {blocked}
                 </div>
               )}
-              <div className="flex gap-3">
+              <div className="flex gap-3 items-center">
+                <label htmlFor="nick" className="sr-only">Ник</label>
                 <input
+                  id="nick"
+                  type="text"
+                  autoComplete="off"
                   value={nick}
                   onChange={(e) => setNick(e.target.value)}
                   placeholder="Таны ник"
-                  className="flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-indigo-200"
+                  className="flex-1 px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-400 caret-indigo-600 shadow-sm"
                 />
                 <button
                   onClick={async () => {
