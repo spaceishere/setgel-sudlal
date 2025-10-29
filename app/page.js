@@ -207,7 +207,9 @@ export default function QuizPage() {
         nick: nick || "Зочин",
         correct,
         total: questions.length,
-        percentage: questions.length ? Math.round((correct / questions.length) * 100) : 0,
+        percentage: questions.length
+          ? Math.round((correct / questions.length) * 100)
+          : 0,
       };
       setSubmitting(true);
       setSubmitError("");
@@ -251,14 +253,14 @@ export default function QuizPage() {
     score.answered > 0 ? Math.round((score.correct / score.answered) * 100) : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-3xl bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-6 md:p-10">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-50 flex items-center justify-center p-3 sm:p-4">
+      <div className="w-full max-w-3xl bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-5 sm:p-6 md:p-10">
         <header className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="flex items-center justify-between gap-3 mb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Сэтгэц ба Ухамсар
             </h1>
-            <div className="text-sm font-medium text-gray-600 bg-gray-100 px-4 py-2 rounded-full">
+            <div className="text-xs sm:text-sm font-medium text-gray-600 bg-gray-100 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
               {score.answered} / {questions.length}
             </div>
           </div>
@@ -274,14 +276,19 @@ export default function QuizPage() {
         {!started ? (
           <main>
             <div className="space-y-4">
-              <p className="text-gray-700">Эхлэхийн өмнө нэрээ оруулна уу. Нэг никнэймээр зөвхөн нэг удаа өгөх боломжтой.</p>
+              <p className="text-gray-700">
+                Эхлэхийн өмнө нэрээ оруулна уу. Нэг никнэймээр зөвхөн нэг удаа
+                өгөх боломжтой.
+              </p>
               {blocked && (
                 <div className="p-3 rounded-lg border border-amber-300 bg-amber-50 text-amber-700">
                   {blocked}
                 </div>
               )}
-              <div className="flex gap-3 items-center">
-                <label htmlFor="nick" className="sr-only">Ник</label>
+              <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
+                <label htmlFor="nick" className="sr-only">
+                  Ник
+                </label>
                 <input
                   id="nick"
                   type="text"
@@ -289,24 +296,28 @@ export default function QuizPage() {
                   value={nick}
                   onChange={(e) => setNick(e.target.value)}
                   placeholder="Таны ник"
-                  className="flex-1 px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-400 caret-indigo-600 shadow-sm"
+                  className="w-full sm:flex-1 px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-4 focus:ring-indigo-200 focus:border-indigo-400 caret-indigo-600 shadow-sm text-base"
                 />
                 <button
                   onClick={async () => {
                     const key = (nick || "").trim().toLowerCase();
                     if (!key) return setBlocked("Нэрээ оруулна уу.");
                     try {
-                      const res = await fetch(`/api/attempts?nick=${encodeURIComponent(key)}`);
+                      const res = await fetch(
+                        `/api/attempts?nick=${encodeURIComponent(key)}`
+                      );
                       const data = await res.json();
                       if (data?.exists) {
-                        setBlocked("Энэ никнэймээр аль хэдийн өгсөн байна. Дахин өгөх боломжгүй.");
+                        setBlocked(
+                          "Энэ никнэймээр аль хэдийн өгсөн байна. Дахин өгөх боломжгүй."
+                        );
                         return;
                       }
                     } catch {}
                     setBlocked("");
                     setStarted(true);
                   }}
-                  className="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300"
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300"
                 >
                   Эхлэх
                 </button>
@@ -319,17 +330,17 @@ export default function QuizPage() {
               <div className="inline-block text-sm font-semibold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full mb-3">
                 Асуулт {page + 1} / {questions.length}
               </div>
-              <h2 className="text-xl md:text-2xl font-semibold text-gray-800 leading-relaxed">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 leading-relaxed">
                 {current.q}
               </h2>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {current.options.map((opt, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSelect(idx)}
-                  className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-200 hover:shadow-md
+                  className={`w-full text-left p-4 sm:p-5 rounded-xl border-2 transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-200 hover:shadow-md min-h-14 text-base sm:text-lg
                     ${
                       answers[current.id] === idx
                         ? "bg-indigo-50 border-indigo-400 shadow-md transform scale-[1.02]"
@@ -338,7 +349,7 @@ export default function QuizPage() {
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-semibold text-sm transition-colors
+                      className={`flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-colors
                       ${
                         answers[current.id] === idx
                           ? "bg-indigo-600 text-white"
@@ -353,11 +364,11 @@ export default function QuizPage() {
               ))}
             </div>
 
-            <div className="mt-8 flex justify-between items-center gap-4">
+            <div className="mt-6 sm:mt-8 flex flex-col-reverse md:flex-row justify-between items-stretch md:items-center gap-3 md:gap-4">
               <button
                 onClick={prev}
                 disabled={page === 0}
-                className="px-6 py-3 rounded-xl font-medium border-2 border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gray-200"
+                className="w-full md:w-auto px-6 py-3 rounded-xl font-medium border-2 border-gray-300 bg-white hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gray-200"
               >
                 ← Өмнөх
               </button>
@@ -365,7 +376,7 @@ export default function QuizPage() {
               <button
                 onClick={next}
                 disabled={submitting}
-                className="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full md:w-auto px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {page < questions.length - 1 ? "Дараах →" : "Дүн харах"}
               </button>
@@ -389,7 +400,8 @@ export default function QuizPage() {
                   {percentage}%
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  ({score.answered} асуултад хариулсан) • Өгсөн: {nick || "Зочин"}
+                  ({score.answered} асуултад хариулсан) • Өгсөн:{" "}
+                  {nick || "Зочин"}
                 </p>
               </div>
             </div>
@@ -440,7 +452,7 @@ export default function QuizPage() {
 
         <footer className="mt-8 pt-6 border-t border-gray-200 text-center">
           <p className="text-sm text-gray-500">
-            Сэдэв: Сэтгэц ба Ухамсар • Шалгалтын систем • <a className="underline" href="/admin">Админ</a>
+            Сэдэв: Сэтгэц ба Ухамсар • Шалгалтын систем • ß
           </p>
         </footer>
       </div>
